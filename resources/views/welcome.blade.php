@@ -63,8 +63,8 @@
                 margin-bottom: 30px;
             }
             .leaflet-container {
-                height: 400px;
-                width: 500px;
+                height: 500px;
+                width: 800px;
             }
         </style>
     </head>
@@ -85,8 +85,7 @@
             @endif
 
             <div class="content">
-                <div id="map-container">
-
+                <div id="wrapper">
                 </div>
             </div>
             <script src="/js/app.js"></script>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\MarkerLocationChangedEvent;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::post('/test', function(Request $request) {
+    $lat = $request->lat;
+    $lng = $request->lng;
+
+    for ($i=0; $i<5; $i++) {
+        $lat  += 0.00004;
+        $lng  += 0.00004;
+        event(new MarkerLocationChangedEvent($lat, $lng));
+        sleep(2);
+    }
+
+    return response()->json('OK');
 });

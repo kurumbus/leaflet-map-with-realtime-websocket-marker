@@ -11,5 +11,5 @@ Uses react-leaflet and pusher.js but implementation can be swapped rather easily
 
 https://leaflet-map-with-realtime-websocket-marker.gs-software.io/
 
-###me
+### Author
 https://www.upwork.com/fl/gregoryshein

@@ -14,19 +14,28 @@ use Illuminate\Queue\SerializesModels;
 class MarkerLocationChangedEvent implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $lat;
-    public $lng;
+    public $position;
+    public $id;
+    public $id_client;
+    public $battery;
+    public $info;
 
     /**
      * Create a new event instance.
      *
-     * @param $lat
-     * @param $lng
+     * @param $id
+     * @param $data
      */
-    public function __construct($lat, $lng)
+    public function __construct($id, $data)
     {
-        $this->lat = $lat;
-        $this->lng = $lng;
+        $this->id = $id;
+        $this->position =[
+            'lat' => $data['lat'] ?? null,
+            'lng' => $data['lng'] ?? null
+        ];
+        $this->id_client = $data['id_client'] ?? null;
+        $this->battery = $data['battery'] ?? null;
+        $this->info = $data['info'] ?? null;
     }
 
 

@@ -1,14 +1,7 @@
 
 import React, { Component } from 'react'
-import {
-    Circle,
-    CircleMarker, GeoJSON,
+import {GeoJSON,
     Map,
-    Marker,
-    Polygon,
-    Polyline,
-    Popup,
-    Rectangle,
     ScaleControl,
     TileLayer, Tooltip
 } from 'react-leaflet'
@@ -22,30 +15,41 @@ export default class NewMap extends Component {
             lat:  49.4185533,
             lng:  8.67689,
         },
-        marker: {
-            lat:  49.4185533,
-            lng:  8.67689,
-        }
+        markers: [],
     };
 
     componentDidMount() {
+        axios.get('/api/markers').then(res => this.setState({markers: res.data}));
+
         window.Echo.channel('marker-location')
-            .listen('.marker-location-changed-event', (e) => {
-               // console.log(e);
-                const {lat, lng} = e;
-                this.setState({marker: {lat, lng}})
+            .listen('.marker-location-changed-event', (marker) => {
+                this.setState({
+                    markers: this.state.markers.filter(i => i.id !== marker.id).concat(marker)
+                });
             });
     }
 
     testMoving() {
-        const {lat, lng} = this.state.marker;
-        axios.post('/test', {lat,lng}).then(res => {
-            console.log(res);
-        });
+        const {lat, lng} = this.state.latlng;
+        axios.post('/test', {lat,lng}).then(res => console.log(res));
+    }
+
+    _getIcon(marker) {
+        const customMarker = L.icon({ iconUrl: require('../../icons/truck.svg'), });
+        const truckGreen = L.icon({ iconUrl: require('../../icons/truck_green.svg'), });
+        const truckYellow = L.icon({ iconUrl: require('../../icons/truck_yellow.svg'), });
+        const truckRed = L.icon({ iconUrl: require('../../icons/truck_red.svg'), });
+
+        switch (marker.battery) {
+            case 0: return truckGreen;
+            case 1: return truckYellow;
+            case 2: return truckRed;
+            default: return  customMarker;
+        }
     }
 
     render() {
-        const customMarker = L.icon({ iconUrl: require('../../icons/truck.svg'), });
+
         const emptyMarker = L.icon({ iconUrl: require('../../icons/empty.svg'), });
 
 
@@ -68,19 +72,18 @@ export default class NewMap extends Component {
                         maxNativeZoom={19}
                         maxZoom={25}
                     />
-{/*                    <Marker position={this.state.marker}  icon={customMarker} >
-                        <Popup>Realtime truck location</Popup>
-                    </Marker>*/}
+                    {
+                        this.state.markers.map(marker =>
+                            <DriftMarker
+                                key={marker.id}
+                                position={marker.position}
+                                duration={1000}
+                                icon={this._getIcon(marker)} >
+                                <Tooltip>{marker.info}</Tooltip>
+                            </DriftMarker>
+                        )
+                    }
 
-                    <DriftMarker
-                        // if position changes, marker will drift its way to new position
-                        position={this.state.marker}
-                        // time in ms that marker will take to reach its destination
-                        duration={1000}
-                        icon={customMarker} >
-                        <Popup>Hi this is a popup</Popup>
-                        <Tooltip>Hi here is a tooltip</Tooltip>
-                    </DriftMarker>
                     <ScaleControl/>
                 </Map>
             </div>

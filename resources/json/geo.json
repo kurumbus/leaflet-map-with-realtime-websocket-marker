@@ -1,59 +1,7 @@
 {
     "type": "FeatureCollection",
     "features": [
-        {
-            "type": "Feature",
-            "id": "way/94551277",
-            "properties": {
-                "type": "way",
-                "id": "94551277",
-                "tags": {
-                    "buildingpart": "hall",
-                    "height": "3.9",
-                    "name": "012"
-                },
-                "relations": [
-                    {
-                        "role": "buildingpart",
-                        "rel": "1370728",
-                        "reltags": {
-                            "height": "4",
-                            "level": "0",
-                            "name": "Erdgeschoss",
-                            "type": "level"
-                        }
-                    }
-                ],
-                "meta": {}
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            8.6770429,
-                            49.4186016
-                        ],
-                        [
-                            8.677043,
-                            49.418499
-                        ],
-                        [
-                            8.6771835,
-                            49.418499
-                        ],
-                        [
-                            8.6771835,
-                            49.4186016
-                        ],
-                        [
-                            8.6770429,
-                            49.4186016
-                        ]
-                    ]
-                ]
-            }
-        },
+
         {
             "type": "Feature",
             "id": "way/94551289",

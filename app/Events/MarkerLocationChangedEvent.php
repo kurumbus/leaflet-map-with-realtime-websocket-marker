@@ -56,6 +56,6 @@ class MarkerLocationChangedEvent implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new Channel('marker-location');
+        return new Channel('marker-location-'.$this->id_client);
     }
 }

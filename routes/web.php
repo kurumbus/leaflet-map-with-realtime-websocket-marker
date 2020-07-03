@@ -27,8 +27,9 @@ Route::get('/api/markers', function(Request $request) {
                 'lat' =>  49.4185511,
                 'lng' =>  8.67669,
             ],
+            'id_client' =>1,
             'battery' => 1,
-            'info' => $faker->sentence,
+            'info' => 'Vehicle: '.$faker->word.', Operator: '.$faker->name,
         ],
         [
             'id' => 2,
@@ -36,8 +37,9 @@ Route::get('/api/markers', function(Request $request) {
                 'lat' =>  49.4185534,
                 'lng' =>  8.67690,
             ],
+            'id_client' =>1,
             'battery' => 0,
-            'info' => $faker->sentence,
+            'info' => 'Vehicle: '.$faker->word.', Operator: '.$faker->name,
         ],
         [
             'id' => 3,
@@ -45,8 +47,9 @@ Route::get('/api/markers', function(Request $request) {
                 'lat' =>  49.4186634,
                 'lng' =>  8.67688,
             ],
+            'id_client' =>1,
             'battery' => 2,
-            'info' => $faker->sentence,
+            'info' => 'Vehicle: '.$faker->word.', Operator: '.$faker->name,
         ],
     ]);
 });
@@ -64,7 +67,7 @@ Route::post('/test', function(Request $request) {
             'lng' => $lng,
             'id_client' =>1,
             'battery' => 2,
-            'info' => $faker->sentence,
+            'info' => 'Vehicle: '.$faker->word.', Operator: '.$faker->name,
         ];
         event(new MarkerLocationChangedEvent(random_int(1,3), $data));
         sleep(1);

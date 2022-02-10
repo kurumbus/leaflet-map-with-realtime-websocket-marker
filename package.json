@@ -32,7 +32,7 @@
         "leaflet": "^1.6.0",
         "leaflet-drift-marker": "^1.0.3",
         "leaflet-realtime": "^2.2.0",
-        "node-sass": "^4.14.1",
+        "node-sass": "^7.0.0",
         "pusher-js": "^6.0.3",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
